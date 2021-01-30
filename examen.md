@@ -194,3 +194,39 @@ public class ClasaExamen {
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/vizualizare" />
 ```
+
+
+### TextInputLayout
+
+```xml
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/idEditTextNou"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnImagineMAP">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="hint" />
+    </com.google.android.material.textfield.TextInputLayout>
+```
+
+### String Array
+
+```xml
+    <string-array name="dropdown_items">
+        <item name="optiune-1">Optiune 1</item>
+        <item name="optiune-2">Optiune 2</item>
+        <item name="optiune-3">Optiune 3</item>
+        <item name="optiune-4">Optiune 4</item>
+        <item name="optiune-5">Optiune 5</item>
+        <item name="optiune-6">Optiune 6</item>
+    </string-array>
+
+```
