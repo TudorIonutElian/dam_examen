@@ -71,3 +71,22 @@ public class ClasaExamen {
     }
 }
 ```
+
+## Cerinta 2
+> Se va crea o activitate de preluare a datelor care va include obligatoriu controalele alocate, pe langa alte controale adecvate **(1p)**.
+
+```xml
+
+<TextView
+        android:id="@+id/textNumarCalorii"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/salvati_numar_calorii"
+        app:layout_constraintEnd_toStartOf="@+id/setari70Guide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/setariLeftGuide"
+        app:layout_constraintTop_toBottomOf="@+id/txtNumarOreOdihna" /
+
+```
