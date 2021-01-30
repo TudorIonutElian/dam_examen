@@ -75,18 +75,38 @@ public class ClasaExamen {
 ## Cerinta 2
 > Se va crea o activitate de preluare a datelor care va include obligatoriu controalele alocate, pe langa alte controale adecvate **(1p)**.
 
+### TextView
 ```xml
 
 <TextView
-        android:id="@+id/textNumarCalorii"
+        android:id="@+id/idTextViewNou"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:gravity="center_horizontal|center_vertical"
-        android:text="@string/salvati_numar_calorii"
-        app:layout_constraintEnd_toStartOf="@+id/setari70Guide"
+        android:text="Text de Salvat in Strings"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/setariLeftGuide"
-        app:layout_constraintTop_toBottomOf="@+id/txtNumarOreOdihna" /
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+```
+
+### Switch
+
+```xml
+<Switch
+        android:id="@+id/idSwitchNou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Text de Salvat in Strings"
+        android:textColor="@android:color/holo_orange_dark"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
 
 ```
