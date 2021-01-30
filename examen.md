@@ -424,3 +424,281 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 }
 
 ```
+
+#### Constante pentru SQLite
+```java
+    public static final String DATABASE_NAME = "map.db";
+    public static final String MAP_TABLE_NAME = "map_data";
+    public static final String MAP_TABLE_NAME_WORKING = "map_data_WORKING";
+    public static final String MAP_COLUMN_ID = "id";
+    public static final String MAP_COLUMN_DATE = "data";
+    public static final String MAP_COLUMN_KG = "kg";
+
+    public static final String MAP_COLUMN_SPORT = "sport";
+    public static final String MAP_COLUMN_ODIHNA = "odihna";
+    public static final String MAP_COLUMN_CALORII = "calorii";
+    public static final String MAP_COLUMN_COEFCIENT = "coeficient";
+```
+
+#### Constructor Clasa DBHelper
+```java
+    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+        SQLiteDatabase db = this.getWritableDatabase();
+    }
+```
+
+#### Suprascriere metoda onCreate
+
+```java
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // TODO Auto-generated method stub
+        db.execSQL(
+                "create table " + MAP_TABLE_NAME +
+                        " (" +
+                        MAP_COLUMN_ID + " integer primary key, " +
+                        MAP_COLUMN_DATE + " String, " +
+                        MAP_COLUMN_KG + " integer, " +
+                        MAP_COLUMN_SPORT + " integer, " +
+                        MAP_COLUMN_ODIHNA + " integer, " +
+                        MAP_COLUMN_CALORII + " integer, " +
+                        MAP_COLUMN_COEFCIENT + " decimal(2,2)" +")"
+        );
+    }
+```
+
+#### Suprascriere metoda onUpgrade
+
+```java
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // TODO Auto-generated method stub
+        db.execSQL("DROP TABLE IF EXISTS " + MAP_TABLE_NAME );
+        onCreate(db);
+    }
+```
+
+#### Metoda pentru preluare date in baza unui Cursor
+
+```java
+    // Preluare Toate inregistrarile
+    public Cursor getData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery("SELECT * FROM " + MAP_TABLE_NAME, null);
+        return res;
+    }
+```
+
+#### Metoda SQlite pentru preluare count valori
+
+```java
+    // Get numar inregistrari
+    public int numberOfRows(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, MAP_TABLE_NAME);
+        return numRows;
+    }
+    
+```
+
+#### Metoda SQLite pentru preluare byID
+
+```java
+    // Preluare Date activitate personala by ID
+    public Cursor getActivitateById(int id_editare){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery("SELECT * FROM " + MAP_TABLE_NAME + " WHERE " + MAP_COLUMN_ID + " = " + id_editare,
+                null);
+        return res;
+    }
+```
+#### metoda SQLite pentru inserare continut nou
+
+```java
+    // Inserare activitate noua
+    public boolean inserareActivitate(ActivitatePersonala activitatePersonala){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentActivitate = new ContentValues();
+
+        contentActivitate.put(MAP_COLUMN_DATE, activitatePersonala.getData_adaugarii());
+        contentActivitate.put(MAP_COLUMN_KG, activitatePersonala.getNumar_kilograme());
+        contentActivitate.put(MAP_COLUMN_SPORT, activitatePersonala.getNumar_ore_sport());
+        contentActivitate.put(MAP_COLUMN_ODIHNA, activitatePersonala.getNumar_ore_odihna());
+        contentActivitate.put(MAP_COLUMN_CALORII, activitatePersonala.getNumar_calorii_consumate());
+        contentActivitate.put(MAP_COLUMN_COEFCIENT, activitatePersonala.getValoare_coeficient());
+        long rezultat = 0;
+        try{
+           rezultat = db.insert(MAP_TABLE_NAME, null, contentActivitate);
+        }catch (Exception ex){
+            Log.d("Excep", ex.getMessage());
+        }
+        if(rezultat == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+```
+
+#### Metoda SQLite pentru stergere continut pe baza id-ului primit
+
+```java
+    // Stergere activitate by ID
+    public boolean stergereActivitate(int idStergere){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + MAP_TABLE_NAME + " WHERE " + MAP_COLUMN_ID + " = "+ idStergere +"");
+        db.close();
+        return true;
+    }
+```
+
+
+#### Metoda SQLite pentru actualizare continut pe baza id-ului primit
+
+```java
+// Update actualizare
+    public boolean updateActivitate(int id_editare, ActivitatePersonala activitatePersonala){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues dataUpdate = new ContentValues();
+
+        dataUpdate.put(MAP_COLUMN_DATE, activitatePersonala.getData_adaugarii());
+        dataUpdate.put(MAP_COLUMN_KG, activitatePersonala.getNumar_kilograme());
+        dataUpdate.put(MAP_COLUMN_SPORT, activitatePersonala.getNumar_ore_sport());
+        dataUpdate.put(MAP_COLUMN_ODIHNA, activitatePersonala.getNumar_ore_odihna());
+        dataUpdate.put(MAP_COLUMN_CALORII, activitatePersonala.getNumar_calorii_consumate());
+        dataUpdate.put(MAP_COLUMN_COEFCIENT, activitatePersonala.getValoare_coeficient());
+        db.update(MAP_TABLE_NAME, dataUpdate, MAP_COLUMN_ID + "= ?", new String[]{String.valueOf(id_editare)});
+
+        db.close();
+        return true;
+    }
+    
+```
+
+#### Descriere implementare Chart
+
+```java
+    /* 
+    ** Clasa de tip inregistrari pentru grafic
+    ** Va contine inregistrati ce au cate doi membrii
+    */
+
+    public class InregistrariChart {
+        // Membrii sau proprietatile clasei
+        private int id;
+        private int kg;
+
+        // Constructorul clasei
+        public InregistrariChart(int id, int kg) {
+            this.id = id;
+            this.kg = kg;
+        }
+
+        // Getter pentru membrul id
+        public int getId() {
+            return id;
+        }
+        
+        // Setter pentru membrul id
+        public void setId(int id) {
+            this.id = id;
+        }
+        
+        // Getter pentru membrul kg
+        public int getKg() {
+            return kg;
+        }
+
+        // Setter pentru membrul kg
+        public void setKg(int kg) {
+            this.kg = kg;
+        }
+    }
+
+
+public class Imagine extends AppCompatActivity {
+    // Creare membru de tip DatabaseHelper - atentie la denumirea clasei Java 
+    private DatabaseHelper databaseHelper;
+
+    // Creare ArrayList de tip Clasei utilizate ppentru inregistrari
+    private ArrayList<InregistrariChart> inregistrariCharts;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_imagine);
+
+        // Atribuire valoare campului / membrului databaseHelper
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        inregistrariCharts = new ArrayList<InregistrariChart>();
+
+        // Cursor pentru preluarea datelor din baza de date.
+        // Denumirea metodei este implementata in clasa Databasehelper
+        Cursor c = databaseHelper.getData();
+        if(c.moveToFirst()){
+            do{
+                // Creare inregistrare pentru chart - 
+                // getInt(0) - la prima pozitie avem int 
+                // getInt(2) - la a doua pozitie avem int 
+                InregistrariChart inregistrariChart = new InregistrariChart(c.getInt(0), c.getInt(2));
+
+                // Salvare inregistrare chart in lista
+                inregistrariCharts.add(inregistrariChart);
+            }while(c.moveToNext());
+        }
+
+        // legare anyChartView pe baza id-ului din xml
+        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
+
+        Cartesian cartesian = AnyChart.column();
+
+        List<DataEntry> data = new ArrayList<>();
+        for(int i = 0; i < inregistrariCharts.size(); i++){
+            data.add(new ValueDataEntry(String.valueOf(inregistrariCharts.get(i).getId()), inregistrariCharts.get(i).getKg()));
+        }
+
+
+
+        Column column = cartesian.column(data);
+
+        column.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(5d)
+                .format("kg{%Value}{groupsSeparator: }");
+
+        cartesian.animation(true);
+        cartesian.title(getString(R.string.imagine_text_top));
+
+        cartesian.yScale().minimum(0d);
+
+        cartesian.yAxis(0).labels().format("Kg {%Value}{groupsSeparator: }");
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian.interactivity().hoverMode(HoverMode.BY_X);
+
+        cartesian.xAxis(0).title(getString(R.string.imagine_column_id));
+        cartesian.yAxis(0).title(getString(R.string.imagine_column_kg));
+
+        anyChartView.setChart(cartesian);
+
+    }
+}
+    
+```
+
+#### descriere
+
+```java
+    
+```
+
+#### descriere
+
+```java
+    
+```
