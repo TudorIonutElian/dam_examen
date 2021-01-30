@@ -138,3 +138,59 @@ public class ClasaExamen {
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.6" />
 ```
+
+
+### TextView
+
+```xml
+ <TextView
+        android:id="@+id/idTextViewNou"
+        android:layout_width="220dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/coeficient_date"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+```
+
+### EditText
+
+```xml
+<EditText
+        android:id="@+id/idEditTextNou"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:contentDescription="@string/nr_kg"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+```
+
+### ImageView
+
+```xml
+    <ImageView
+        android:id="@+id/idImageViewNou"
+        android:layout_width="86dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="196dp"
+        android:contentDescription="@string/vizualizare_map"
+        app:layout_constraintStart_toStartOf="@+id/leftGuide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vizualizare" />
+```
