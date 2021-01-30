@@ -107,6 +107,34 @@ public class ClasaExamen {
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
+```
 
 
+### Button
+
+```xml
+<Button
+        android:id="@+id/idButtonNou"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="164dp"
+        android:background="@color/colorRed"
+        android:text="@string/reseteaza_setari"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+```
+
+### Vertical Guideline
+
+```xml
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/idGuidelineNou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
 ```
