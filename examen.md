@@ -3,7 +3,7 @@
 ## Cerinta 1
 > Se va defini o clasa cu minim cinci atribute relevante, din domeniul dat, pentru care se vor implementa/genera constructori, metoda  *toString()* si functii accesor(metode get(), set()) **(1p)**.
 
-``
+```
 public class ClasaExamen {
     private int proprietate_int_1;
     private int proprietate_int_2;
@@ -70,4 +70,4 @@ public class ClasaExamen {
                 '}';
     }
 }
-``
+```
