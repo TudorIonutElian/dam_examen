@@ -228,5 +228,75 @@ public class ClasaExamen {
         <item name="optiune-5">Optiune 5</item>
         <item name="optiune-6">Optiune 6</item>
     </string-array>
+```
 
+### Shared Preferences
+#### Creare si Salvare
+```java
+
+    public void salveazaSetariCaPreferinte(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean(SALVEAZA_KILOGRAME, salveazaNumarKilograme.isChecked());
+        editor.put(SALVEAZA_SPORT, salveazaNumarOreSport.isChecked());
+        editor.putBoolean(SALVEAZA_ODIHNA, salveazaNumarOreOdihna.isChecked());
+        editor.putBoolean(SALVEAZA_CALORII, salveazaNumarCalorii.isChecked());
+
+        editor.commit();
+        this.finish();
+        Toast.makeText(getApplicationContext(), getText(R.string.preferences_setari_salvate), Toast.LENGTH_LONG).show();
+    }
+```
+
+#### Preluare 
+
+```java
+
+   public void preluareSetariPreferinte(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared_preferences", MODE_PRIVATE);
+        // Setare Kilograme
+        boolean setareKilograme = sharedPreferences.getBoolean(SALVEAZA_KILOGRAME, false);
+        if(setareKilograme){
+            salveazaNumarKilograme.setText(getText(R.string.set_mesaj_text_DA));
+            salveazaNumarKilograme.setTextColor(getResources().getColor(R.color.colorGreen));
+        }else {
+            salveazaNumarKilograme.setText(getText(R.string.set_mesaj_text_NU));
+            salveazaNumarKilograme.setTextColor(getResources().getColor(R.color.colorRed));
+        }
+        salveazaNumarKilograme.setChecked(setareKilograme);
+
+        // Setare sport
+        boolean setareSport = sharedPreferences.getBoolean(SALVEAZA_SPORT, false);
+        if(setareSport){
+            salveazaNumarOreSport.setText(getText(R.string.set_mesaj_text_DA));
+            salveazaNumarOreSport.setTextColor(getResources().getColor(R.color.colorGreen));
+        }else {
+            salveazaNumarOreSport.setText(getText(R.string.set_mesaj_text_NU));
+            salveazaNumarOreSport.setTextColor(getResources().getColor(R.color.colorRed));
+        }
+        salveazaNumarOreSport.setChecked(setareSport);
+
+        // Setare odihna
+        boolean setareOdihna = sharedPreferences.getBoolean(SALVEAZA_ODIHNA, false);
+        if(setareOdihna){
+            salveazaNumarOreOdihna.setText(getText(R.string.set_mesaj_text_DA));
+            salveazaNumarOreOdihna.setTextColor(getResources().getColor(R.color.colorGreen));
+        }else {
+            salveazaNumarOreOdihna.setText(getText(R.string.set_mesaj_text_NU));
+            salveazaNumarOreOdihna.setTextColor(getResources().getColor(R.color.colorRed));
+        }
+        salveazaNumarOreOdihna.setChecked(setareOdihna);
+
+        // Setare calorii
+        boolean setareCalorii = sharedPreferences.getBoolean(SALVEAZA_CALORII, false);
+        if(setareCalorii){
+            salveazaNumarCalorii.setText(getText(R.string.set_mesaj_text_DA));
+            salveazaNumarCalorii.setTextColor(getResources().getColor(R.color.colorGreen));
+        }else {
+            salveazaNumarCalorii.setText(getText(R.string.set_mesaj_text_NU));
+            salveazaNumarCalorii.setTextColor(getResources().getColor(R.color.colorRed));
+        }
+        salveazaNumarCalorii.setChecked(setareCalorii);
+    }
 ```
